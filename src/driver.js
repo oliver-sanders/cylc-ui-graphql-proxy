@@ -63,7 +63,7 @@ class DataDriver {
     }
 
     print () {
-        var ret = 'Root Query';
+        var ret = 'Root Query:';
         if (this.query) {
             ret += '\n' + prefix_lines(print(this.query), '    ');
         } else {
