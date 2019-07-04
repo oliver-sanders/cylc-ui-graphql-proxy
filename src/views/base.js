@@ -1,22 +1,24 @@
 class View {
 
-    constructor(name, driver) {
+    constructor(name, qproxy) {
         this.name = name;
         this.hash = this.getHash();
-        this.driver = driver;
-        this.driver.register(this);
+        this.qproxy = qproxy;
+        this.qproxy.register(this);
     }
 
     getHash() {
+        /* psudo-random hash for internal identification only */
         return Math.random();
     }
 
     id() {
+        /* identifier for this view */
         return `${this.name}: ${this.hash}`;
     }
 
     destroy() {
-        this.driver.unregister(this);
+        this.qproxy.unregister(this);
     }
 
 }

@@ -1,19 +1,27 @@
 import { merge } from './gquery';
-import { DataDriver } from './driver';
+import { QueryProxy } from './driver';
 import { TreeView } from './views/tree';
 import { GraphView } from './views/graph';
 
 
-var driver = new DataDriver();
-var tree = new TreeView(driver);
-var graph = new GraphView(driver);
+// create the global query proxy through which all subscriptions are
+// registered
+var qproxy = new QueryProxy();
 
-driver.print();
+// initalise the views
+var tree = new TreeView(qproxy);
+var graph = new GraphView(qproxy);
 
+// dump the query status
+console.log('dump 1')
+qproxy.print();
+
+// change the state of the tree view
 tree.expandTable();
-tree.collapseTable();
 
-driver.print();
+// dump the query status
+console.log('dump 2')
+qproxy.print();
 
 
 console.log('fin')

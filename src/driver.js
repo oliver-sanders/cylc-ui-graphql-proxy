@@ -1,6 +1,6 @@
 import { parse } from 'graphql/language/parser';
 import { print } from 'graphql/language/printer';
-import { merge, emptyQuery, gClone } from './gquery';
+import { merge, gClone } from './gquery';
 
 
 function prefix_lines(str, pref) {
@@ -8,7 +8,7 @@ function prefix_lines(str, pref) {
 }
 
 
-class DataDriver {
+class QueryProxy {
     constructor() {
         this.subscription;
         this.subscriptions = [];
@@ -17,6 +17,7 @@ class DataDriver {
     }
 
     getHash() {
+        /* psudo-random hash for internal identification only */
         return Math.random();
     }
 
@@ -35,10 +36,12 @@ class DataDriver {
     }
 
     register(view) {
+        /* register a new view */
         this.views[view.id()] = view
     }
 
     unregister(view) {
+        /* unregister a view (all subscriptions will be dropped */
         this.view.remove(view);
         this.subscriptions = this.subscriptions.filter(
             item => item[1] != view
@@ -47,6 +50,7 @@ class DataDriver {
     }
 
     subscribe(view, query) {
+        /* subscribe a view to a query */
         var hash = this.getHash();
         this.subscriptions.push(
             [hash, view, parse(query)]
@@ -56,6 +60,7 @@ class DataDriver {
     }
 
     unsubscribe (hash) {
+        /* un-subscribe a view from a query */
         this.subscriptions = this.subscriptions.filter(
             item => item[0] != hash
         );
@@ -63,7 +68,8 @@ class DataDriver {
     }
 
     print () {
-        var ret = 'Root Query:';
+        /* dump a human-readable representation of all subscriptions */
+        var ret = 'Combined Query:';
         if (this.query) {
             ret += '\n' + prefix_lines(print(this.query), '    ');
         } else {
@@ -84,4 +90,4 @@ class DataDriver {
 }
 
 
-export { DataDriver }
+export { QueryProxy }

@@ -1,6 +1,7 @@
 import { View } from './base'
 
 
+// base query for all tree view functionality
 const QUERY_BASIC = `
 {
     tasks {
@@ -27,6 +28,8 @@ const QUERY_BASIC = `
 }
 `
 
+// represents the fields of the tree view which we will probably want to hide
+// by default
 const QUERY_TABLE = `
 {
     jobs {
@@ -45,10 +48,10 @@ const QUERY_TABLE = `
 
 class TreeView extends View {
 
-    constructor(driver) {
-        super('TreeView', driver)
+    constructor(qproxy) {
+        super('TreeView', qproxy)
         this.subscriptions = {
-            'base': this.driver.subscribe(this, QUERY_BASIC)
+            'base': this.qproxy.subscribe(this, QUERY_BASIC)
         };
     }
 
@@ -56,12 +59,12 @@ class TreeView extends View {
         if ('table' in this.subscriptions) {
             return
         }
-        this.subscriptions['table'] = this.driver.subscribe(this, QUERY_TABLE);
+        this.subscriptions['table'] = this.qproxy.subscribe(this, QUERY_TABLE);
     }
 
     collapseTable() {
         if ('table' in this.subscriptions) {
-            this.driver.unsubscribe(this.subscriptions['table']);
+            this.qproxy.unsubscribe(this.subscriptions['table']);
         }
 
     }

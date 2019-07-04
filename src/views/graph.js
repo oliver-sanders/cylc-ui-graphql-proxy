@@ -1,6 +1,7 @@
 import { View } from './base'
 
 
+// base query for all graph view functionality
 const QUERY_BASIC = `
 {
     tasks {
@@ -28,6 +29,7 @@ const QUERY_BASIC = `
 }
 `
 
+// query required for family grouping
 const QUERY_FAMILIES = `
 {
     families {
@@ -40,11 +42,11 @@ const QUERY_FAMILIES = `
 
 class GraphView extends View {
 
-    constructor(driver) {
-        super('GraphView', driver)
+    constructor(qproxy) {
+        super('GraphView', qproxy)
         this.subscriptions = {
-            'base': this.driver.subscribe(this, QUERY_BASIC),
-            'family': this.driver.subscribe(this, QUERY_FAMILIES)
+            'base': this.qproxy.subscribe(this, QUERY_BASIC),
+            'family': this.qproxy.subscribe(this, QUERY_FAMILIES)
         };
     }
 
@@ -52,12 +54,12 @@ class GraphView extends View {
         if ('family' in this.subscriptions) {
             return
         }
-        this.subscriptions['family'] = this.driver.subscribe(this, QUERY_TABLE);
+        this.subscriptions['family'] = this.qproxy.subscribe(this, QUERY_TABLE);
     }
 
     collapseFamilies() {
         if ('family' in this.subscriptions) {
-            this.driver.unsubscribe(this.subscriptions['family']);
+            this.qproxy.unsubscribe(this.subscriptions['family']);
         }
 
     }

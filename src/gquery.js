@@ -9,28 +9,6 @@ function gClone(query) {
 }
 
 
-function emptyQuery() {
-    return {
-        kind: 'Document',
-        definitions: [
-            {
-                kind: 'OperationDefinition',
-                operation: 'query',
-                name: undefined,
-                variableDefinitions: [],
-                directives: [],
-                selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: []
-                    // loc: { start: N1, end: N2 }
-                },
-                // loc: { start: 0, end: NN }
-            }
-        ]
-    }
-}
-
-
 function getSelections(a) {
     /* return dictionary of selections present on a node. */
     var selections = {};
@@ -107,4 +85,4 @@ function test() {
 
 //test();
 
-export { merge, emptyQuery, gClone }
+export { merge, gClone }
