@@ -10,7 +10,6 @@ function prefix_lines(str, pref) {
 
 class QueryProxy {
     constructor() {
-        this.subscription;
         this.subscriptions = [];
         this.views = new WeakMap();
         this.query = null;
@@ -42,7 +41,7 @@ class QueryProxy {
 
     unregister(view) {
         /* unregister a view (all subscriptions will be dropped */
-        this.view.remove(view);
+        this.views.remove(view);
         this.subscriptions = this.subscriptions.filter(
             item => item[1] != view
         );
