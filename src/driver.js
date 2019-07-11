@@ -43,7 +43,7 @@ class QueryProxy {
         /* unregister a view (all subscriptions will be dropped */
         this.views.remove(view);
         this.subscriptions = this.subscriptions.filter(
-            item => item[1] != view
+            item => item[1] !== view
         );
         this.recompute();
     }
@@ -61,7 +61,7 @@ class QueryProxy {
     unsubscribe (hash) {
         /* un-subscribe a view from a query */
         this.subscriptions = this.subscriptions.filter(
-            item => item[0] != hash
+            item => item[0] !== hash
         );
         this.recompute();
     }
@@ -78,7 +78,7 @@ class QueryProxy {
         for (let id in this.views) {
             view = this.views[id];
             ret += `\n${id}`;
-            for (let item of this.subscriptions.filter(item => item[1] == view)) {
+            for (let item of this.subscriptions.filter(item => item[1] === view)) {
                 ret += `\n    # ${item[0]}`
                 ret += '\n' + prefix_lines(print(item[2]), '    ');
             }
