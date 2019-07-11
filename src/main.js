@@ -1,4 +1,3 @@
-import { merge } from './gquery';
 import { QueryProxy } from './driver';
 import { TreeView } from './views/tree';
 import { GraphView } from './views/graph';
