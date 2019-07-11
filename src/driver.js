@@ -16,7 +16,7 @@ class QueryProxy {
     }
 
     getHash() {
-        /* psudo-random hash for internal identification only */
+        /* pseudo-random hash for internal identification only */
         return Math.random();
     }
 

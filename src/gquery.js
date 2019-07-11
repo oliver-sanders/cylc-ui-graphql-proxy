@@ -4,7 +4,7 @@ import { print } from 'graphql/language/printer';
 
 function gClone(query) {
     /* clone a query, why oh why isn't there a better way of doing this in JS!
-     * this is acytually kinda dangerous as there can be lost information */
+     * this is actually kinda dangerous as there can be lost information */
     return JSON.parse(JSON.stringify(query));
 }
 
