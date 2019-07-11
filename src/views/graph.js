@@ -1,4 +1,5 @@
 import { View } from './base'
+import {QUERY_TABLE} from "./tree";
 
 
 // base query for all graph view functionality

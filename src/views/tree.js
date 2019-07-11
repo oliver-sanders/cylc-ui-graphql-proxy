@@ -72,4 +72,4 @@ class TreeView extends View {
 }
 
 
-export { TreeView }
+export { TreeView, QUERY_TABLE }

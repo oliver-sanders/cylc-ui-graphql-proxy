@@ -1,4 +1,3 @@
-import { merge } from './gquery';
 import { QueryProxy } from './driver';
 import { TreeView } from './views/tree';
 import { GraphView } from './views/graph';
@@ -8,7 +7,7 @@ import { GraphView } from './views/graph';
 // registered
 var qproxy = new QueryProxy();
 
-// initalise the views
+// initialise the views
 var tree = new TreeView(qproxy);
 var graph = new GraphView(qproxy);
 
